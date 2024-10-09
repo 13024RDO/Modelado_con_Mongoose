@@ -1,0 +1,116 @@
+# Gestión de Ventas - Suministros de Limpieza
+
+![Entidad-Relacion](img/entidad-relacion.png)
+
+## Contexto
+
+Proyecto diseñado para un comercio de suministros de limpieza donde los empleados pueden registrar ventas de forma individual y acceder al sistema con credenciales.
+
+## Modelos Principales
+
+1. **User**: Autenticación y gestión de usuarios.
+2. **Employer**: Representa a los empleados.
+3. **Products**: Detalles de los productos disponibles.
+4. **Sales**: Registro de las ventas realizadas.
+
+### Modelo: User
+
+````javascript
+const userSchema = new mongoose.Schema({
+  username: { type: String, required: true, unique: true },
+  email: { type: String, required: true, unique: true },
+  password: { type: String, required: true },
+});
+
+Modelo: Employer
+
+const productsSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  price: { type: Number, required: true, min: 0 },
+  stock: { type: Number, required: true, min: 0 },
+});
+
+Modelo: Products
+
+const productsSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  price: { type: Number, required: true, min: 0 },
+  stock: { type: Number, required: true, min: 0 },
+});
+
+Modelo: Sales
+
+const saleSchema = new mongoose.Schema({
+  employer: { type: mongoose.Schema.Types.ObjectId, ref: "Employer", required: true },
+  product: { type: mongoose.Schema.Types.ObjectId, ref: "Products", required: true },
+  amount: { type: Number, required: true, min: 0 },
+  quantity: { type: Number, required: true, min: 1 },
+});
+
+
+Aquí tienes un archivo README más simple y resumido para el proyecto:
+
+markdown
+Copiar código
+# Gestión de Ventas - Suministros de Limpieza
+
+![Entidad-Relacion](img/entidad-relacion.png)
+
+## Contexto
+
+Proyecto diseñado para un comercio de suministros de limpieza donde los empleados pueden registrar ventas de forma individual y acceder al sistema con credenciales.
+
+## Modelos Principales
+
+1. **User**: Autenticación y gestión de usuarios.
+2. **Employer**: Representa a los empleados.
+3. **Products**: Detalles de los productos disponibles.
+4. **Sales**: Registro de las ventas realizadas.
+
+### Modelo: User
+
+```javascript
+const userSchema = new mongoose.Schema({
+  username: { type: String, required: true, unique: true },
+  email: { type: String, required: true, unique: true },
+  password: { type: String, required: true },
+});
+Modelo: Employer
+javascript
+Copiar código
+const employerSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  DNI: { type: String, required: true, unique: true },
+  user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+});
+Modelo: Products
+javascript
+Copiar código
+const productsSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  price: { type: Number, required: true, min: 0 },
+  stock: { type: Number, required: true, min: 0 },
+});
+Modelo: Sales
+
+javascript
+Copiar código
+const saleSchema = new mongoose.Schema({
+  employer: { type: mongoose.Schema.Types.ObjectId, ref: "Employer", required: true },
+  product: { type: mongoose.Schema.Types.ObjectId, ref: "Products", required: true },
+  amount: { type: Number, required: true, min: 0 },
+  quantity: { type: Number, required: true, min: 1 },
+});
+
+Relaciones entre Modelos
+Employer se asocia con User para la autenticación.
+Sales se conecta con Employer y Products para registrar las transacciones.
+Instalación
+Clona el repositorio.
+Instala las dependencias con npm install.
+Configura la conexión a MongoDB.
+Ejecuta el proyecto con npm start.
+
+
+Este README ofrece una vista general rápida del proyecto, resaltando los aspectos clave de cada modelo y sus relaciones de una manera más simplificada.
+````
